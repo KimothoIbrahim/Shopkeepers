@@ -5,7 +5,7 @@
 ## It's a helper app for vendors who already have a physical shop - to expand their horizon beyond the limits
 
 _____
-### Architectur
+### Architecture
 The app in made with KivyMD/Kivy and stores access token in sqlite3 within the users app.
 
 The backend *Flask API* is served on a linux server with ufw firewalling, nginx reverse proxy and talking to a mysql database
