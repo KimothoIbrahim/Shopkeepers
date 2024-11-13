@@ -6,7 +6,7 @@
 
 _____
 **Architecture**
-The app in made with KivyMD/Kivy and stores access token in sqlite3 inn the users app.
+The app in made with KivyMD/Kivy and stores access token in sqlite3 within the users app.
 
 Its backend *Flask API* is served on a linux server with ufw firewalling, nginx reverse proxy and talking to a mysql database
 
