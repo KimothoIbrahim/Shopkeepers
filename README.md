@@ -27,3 +27,9 @@ Supply the AUTHORIZATION header with every request, "AUTHORIZATION": BEARER <acc
 2. To install, first get the dependencies by running `pip install -r requirments.txt`
 3. run the server `python3 server.py`
 4. Run the Kivy app `python3 main.py`
+
+### Screenshots
+![alt text](signup.JPG)
+![login](login.JPG)
+![alt text](nav.JPG)
+![alt text](Home.JPG)
