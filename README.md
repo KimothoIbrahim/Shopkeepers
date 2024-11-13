@@ -1,6 +1,6 @@
 # Shopkeepers
 
-## Developed by Ibrahim Kimotho
+*Developed by Ibrahim Kimotho*
 
 ## It's a helper app for vendors who already have a physical shop - to expand their horizon beyond the limits
 
