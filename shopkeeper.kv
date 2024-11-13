@@ -1,0 +1,417 @@
+<Window>:
+    LoginScreen:
+    SignupScreen:
+    HomeScreen:
+    ProfileScreen:
+    OrderScreen:
+    CategoriesScreen:
+    ItemScreen
+
+<HomeScreen>:
+    name: "homeScreen"
+    MDIconButton:
+        icon: "menu"
+        pos_hint: {"center_x": 0.1, "center_y": 0.9}
+        on_release: nav_drawer.set_state("open")
+        elevation: 0
+
+    MDTextField:
+        id: search_field
+        hint_text: "Search here"
+        icon_left: "magnify"
+        mode: "rectangle"
+        font_size: "14sp"
+        size_hint: .8, None
+        height: dp(40)
+        pos_hint: {"center_x": 0.5, "center_y": 0.7}
+        on_text: app.do_search(search_field.text)    
+
+    MDLabel:
+        pos_hint: {"center_x": .85, "center_y": .9}
+        text: "[i]s[/i][b]H[/b][i]op[/i]"
+        halign: "center"
+        markup: True
+        font_style: 'H5'
+        theme_text_color: "Primary"
+        text_color: 1, 1, 1, 1
+        size_hint: None, None
+        size: 60, 27
+        canvas.before:
+
+    ScrollView:
+        pos_hint: {"center_x": .5, 'y': .01}
+        size_hint: .8, .6
+        do_scroll_y: True
+        do_scroll_x: False
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, .05
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        StackLayout:
+            id: item_display
+            spacing: dp(10)
+            padding: dp(10)
+            orientation: 'lr-tb'
+            size_hint_y: None
+            height: self.minimum_height
+            canvas.before:
+                Color:
+                    rgba: 0, .5, 0, .05
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        BoxLayout:
+            padding: dp(10)
+            spacing: dp(10)
+            orientation: 'vertical'
+
+            ScrollView:
+                MDList:
+                    OneLineIconListItem:
+                        text: "Home"
+                        on_release: app.screen_switch("homeScreen")
+                        IconLeftWidget:
+                            icon: "home-outline"
+                    OneLineIconListItem
+                        text: "Categories"
+                        on_release: app.screen_switch("categoriesScreen")
+                        IconLeftWidget:
+                            icon: "format-list-bulleted"
+                    OneLineIconListItem
+                        text: "Orders"
+                        on_release: app.screen_switch("profileScreen")
+                        IconLeftWidget:
+                            icon: "clipboard-list"
+                    OneLineIconListItem
+                        text: "Sales and Offers"
+                        IconLeftWidget:
+                            icon: "tag-outline"
+                    OneLineIconListItem
+                        text: "Profile"
+                        on_release: app.screen_switch("profileScreen")
+                        IconLeftWidget:
+                            icon: "shield-account"
+                    OneLineIconListItem
+                        text: "Admin"
+                        on_release: app.screen_switch("itemScreen")
+                        IconLeftWidget:
+                            icon: "shield-account"
+            
+            NavigationLink:
+                icon: "account-circle"
+                size_hint_x: .9
+                pos_hint: {"y": .3}
+                text: "Log out"
+                on_release: app.logout()
+
+
+<NavigationLink@MDRectangleFlatButton>:
+    icon: ""
+    text: ""
+    on_release: app.screen_switch("loginScreen")
+
+
+<LoginScreen>:
+    name: "loginScreen"
+    MDCard:
+        orientation: "vertical"
+        size_hint: None, None
+        size: "250dp", "400dp"
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 0.5
+        padding: 25
+        spacing: 20
+
+        MDLabel:
+            text: "[i]s[/i][b]H[/b][i]op[/i]"
+            halign: "center"
+            font_style: "H3"
+            markup: True
+            halign: "center"
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        MDTextField:
+            hint_text: "Username"
+            icon_right: "account"
+            size_hint_x: 0.9
+            pos_hint: {"center_x": 0.5}
+            on_focus: if not self.focus: app.set_credential("username", self.text)
+
+        MDTextField:
+            hint_text: "Password"
+            icon_right: "lock"
+            password: True
+            size_hint_x: 0.9
+            pos_hint: {"center_x": 0.5}
+            on_focus: if not self.focus: app.set_credential("password", self.text)
+
+        MDRaisedButton:
+            text: "Login"
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {"center_x": 0.5}
+            on_release: app.login(self.parent)
+            elevation: 0.5
+
+        MDFlatButton:
+            text: "Create Account?"
+            font_style: "Caption"
+            on_release: app.screen_switch('signupScreen')
+
+    MDNavigationDrawer:
+        id: nav_drawer
+
+<SignupScreen>:
+    name: "signupScreen"
+    MDCard:
+        orientation: "vertical"
+        size_hint: None, None
+        size: "250dp", "400dp"
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 0.5
+        padding: 25
+        spacing: 20
+
+        MDLabel:
+            text: "[i]s[/i][b]H[/b][i]op[/i]"
+            halign: "center"
+            font_style: "H3"
+            markup: True
+            halign: "center"
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        MDTextField:
+            hint_text: "Username"
+            icon_right: "account"
+            size_hint_x: 0.9
+            pos_hint: {"center_x": 0.5}
+            on_focus: if not self.focus: app.set_credential("username", self.text)
+
+        MDTextField:
+            hint_text: "Password"
+            icon_right: "lock"
+            password: True
+            size_hint_x: 0.9
+            pos_hint: {"center_x": 0.5}
+            on_focus: if not self.focus: app.set_credential("password", self.text)
+
+        MDTextField:
+            hint_text: "Confirm Password"
+            icon_right: "lock"
+            password: True
+            size_hint_x: 0.9
+            pos_hint: {"center_x": 0.5}
+            on_focus: if not self.focus: app.set_credential("password", self.text)
+
+        MDRaisedButton:
+            text: "Sign up"
+            md_bg_color: app.theme_cls.primary_color
+            pos_hint: {"center_x": 0.5}
+            on_release: app.create_ac(self.parent)
+            elevation: 0.5
+
+        MDFlatButton:
+            text: "Log in?"
+            font_style: "Caption"
+            on_release: app.screen_switch('loginScreen')
+
+<ProfileScreen>:
+    name: "profileScreen"
+    Image:
+        source: "image.jpeg"
+        size_hint: .15, .15
+        pos_hint: {"center_x": .15, "center_y": .9}
+        elevation: 1
+
+    MDLabel:
+        text: "Ibrahim Kimotho"
+        pos_hint: {"x": .23, "center_y": .9}
+        font_style: "H6"
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: (self.x, self.y, self.width, self.height)
+
+    MDLabel:
+        text :"Orders"
+        font_style: "H5"
+        pos_hint: {"x": .09, "y": .25}
+
+
+    ScrollView:
+        size_hint_y: .7
+        MDList:
+            id: slide
+            TwoLineIconListItem:
+                text: f'Value: KSHS. 1593'
+                secondary_text: "ordered at: 09:42am"
+                on_release: app.screen_switch('orderScreen')
+                IconLeftWidget:
+                    icon: "shopping"
+            TwoLineIconListItem:
+                text: f'Value: KSHS. 193'
+                secondary_text: "ordered at: 11:42am"
+                on_release: app.screen_switch('orderScreen')
+                IconLeftWidget:
+                    icon: "shopping"
+    MDIconButton:
+        icon: "keyboard-backspace"
+        pos_hint: {"center_x": 0.1, "center_y": 0.1}
+        on_release: app.screen_switch("homeScreen")
+        elevation: 0
+
+<OrderScreen>:
+    name: "orderScreen"
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        MDLabel:
+            text: f"Order value: [b]Kshs - 1925[/b]"
+            size_hint_y: None
+            markup: True
+            height: self.texture_size[1]
+            pos_hint: {'center_x': 0.5}
+        MDLabel:
+            text: f"10:27am"
+            font_style: 'Caption'
+            size_hint_y: None
+            pos_hint: {'center_x': 0.5}
+            height: self.texture_size[1]
+        MDLabel:
+            text: f"Status: pending"
+            font_style: 'Caption'
+            size_hint_y: None
+            pos_hint: {'center_x': 0.5}
+            height: self.texture_size[1]
+        ScrollView:
+            id: order_items
+            MDList:
+                OneLineListItem:
+                    text: "Item 1"
+        MDRectangleFlatButton:
+            text:"BACK"
+            pos_hint: {"center_x": .5}
+            on_release: app.screen_switch("profileScreen")
+
+<CategoriesScreen>:
+    name:'categoriesScreen'
+    BoxLayout:
+        padding: dp(10)
+        spacing: dp(10)
+        orientation: 'vertical'
+
+        MDLabel:
+            text: "Categories"
+            font_style: 'H4'
+            size_hint_y: None
+            size_hint_x: .8
+            halign: "center"
+            pos_hint: {'center_x': 0.5, 'top': .9}
+            height: self.texture_size[1]
+
+        ScrollView:
+            MDList:
+                halign: "center"
+                size_hint_x: .8
+                padding: dp(10)
+                spacing: dp(10)
+                OneLineIconListItem:
+                    text: "Groceries"
+                    on_release: app.screen_switch("homeScreen")
+                    theme_text_color: 'Custom'
+                    md_bg_color: app.theme_cls.primary_color
+                    text_color: 0, .4, 0, 1
+                    IconLeftWidget:
+                        icon: "food-apple"
+                OneLineIconListItem
+                    text: "Electronics"
+                    on_release: app.screen_switch("homeScreen")
+                    theme_text_color: 'Custom'
+                    md_bg_color: app.theme_cls.primary_color
+                    text_color: 0, .4, 0, 1
+                    IconLeftWidget:
+                        icon: "devices"
+        MDRectangleFlatButton:
+            text:"BACK"
+            pos_hint: {"center_x": .5}
+            on_release: app.screen_switch("homeScreen")
+<ItemScreen>:
+    name: "itemScreen"
+    ScrollView:
+        do_scroll_y: True
+        do_scroll_x: False
+        pos_hint: {"center_x": 0.6, "center_y": 0.5}
+        padding: 25
+        spacing: 25
+
+        MDCard:
+            orientation: "vertical"
+            size_hint: None, None
+            width: "250dp"
+            height: self.minimum_height
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            elevation: 0.5
+            padding: 25
+            spacing: 20
+
+            MDLabel:
+                text: "[i]s[/i][b]H[/b][i]op[/i]"
+                halign: "center"
+                font_style: "H3"
+                markup: True
+                halign: "center"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            MDTextField:
+                hint_text: "Name"
+                icon_right: "account"
+                size_hint_x: 0.9
+                pos_hint: {"center_x": 0.5}
+                on_focus: if not self.focus: app.set_item("name", self.text)
+
+            MDTextField:
+                hint_text: "Price"
+                icon_right: "lock"
+                size_hint_x: 0.9
+                pos_hint: {"center_x": 0.5}
+                on_focus: if not self.focus: app.set_item("price", self.text)
+
+            MDTextField:
+                hint_text: "Buying price"
+                icon_right: "lock"
+                size_hint_x: 0.9
+                pos_hint: {"center_x": 0.5}
+                on_focus: if not self.focus: app.set_item("bp", self.text)
+
+            MDTextField:
+                hint_text: "Barcode"
+                icon_right: "lock"
+                size_hint_x: 0.9
+                pos_hint: {"center_x": 0.5}
+                on_focus: if not self.focus: app.set_item("barcode", self.text)
+
+            MDFlatButton:
+                text: "Picture"
+                size_hint_x: 0.2
+                pos_hint: {"center_x": 0.5}
+                on_release: app.open_file_manager()
+
+            MDRaisedButton:
+                text: "Create Item"
+                md_bg_color: app.theme_cls.primary_color
+                pos_hint: {"center_x": 0.5}
+                on_release: app.create_item(self.parent)
+                elevation: 0.5
+    MDRectangleFlatButton:
+        text:"BACK"
+        pos_hint: {"center_x": .1}
+        on_release: app.screen_switch("homeScreen")
