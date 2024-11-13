@@ -23,7 +23,7 @@ Supply the AUTHORIZATION header with every request, "AUTHORIZATION": BEARER <acc
 - /create_item upload new stock item
 
 ### SETUP
-Clone this repo into your directory of choice *git clone *
+Clone this repo into your directory of choice *git clone https://github.com/KimothoIbrahim/Shopkeepers.git*
 To install, first get the dependencies by running *pip install -r requirments.txt*
 run the server *python3 server.py*
 Run the Kivy app *python3 main.py*
