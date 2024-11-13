@@ -15,9 +15,9 @@ Create an account to be furnished with an access token that you'll need for all 
 Supply the AUTHORIZATION header with every request, "AUTHORIZATION": BEARER <acces-token>
 
 *The end-points:*
-- /craete_ac - create a new user
+- /create_ac - create a new user
 - /products - retrieve all products
 - /upload - for photo uploads
 - /login - validate registerd users
 - /refresh - renew expired access token
-- /craete_item upload new stock item
+- /create_item upload new stock item
